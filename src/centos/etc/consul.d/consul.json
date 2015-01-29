@@ -1,0 +1,7 @@
+{
+  "data_dir": "/var/lib/consul",
+  "datacenter": "nine",
+  "domain": "zbj",
+  "rejoin_after_leave": true,
+  "log_level": "INFO"
+}

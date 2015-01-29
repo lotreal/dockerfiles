@@ -1,19 +1,30 @@
-FROM aweber/ubuntu
-MAINTAINER gavinr@aweber.com
+FROM lotreal/java
 
+MAINTAINER Luo Tao <lotreal@gmail.com>
+
+ENV ES_PKG_NAME elasticsearch-1.4.2
+
+# Install ElasticSearch.
 RUN \
-  echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
-  echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections && \
-  add-apt-repository -y ppa:webupd8team/java && \
-  apt-get update && \
-  apt-get install -y oracle-java7-installer && \
-  apt-get clean && \
-  curl -o /tmp/elasticsearch-1.2.1.deb https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.2.1.deb && \
-  sudo dpkg -i /tmp/elasticsearch-1.2.1.deb && \
-  rm /tmp/elasticsearch-1.2.1.deb
+  cd / && \
+  curl -o /$ES_PKG_NAME.tar.gz https://download.elasticsearch.org/elasticsearch/elasticsearch/$ES_PKG_NAME.tar.gz && \
+  tar xvzf $ES_PKG_NAME.tar.gz && \
+  rm -f $ES_PKG_NAME.tar.gz && \
+  mv /$ES_PKG_NAME /elasticsearch
 
-ADD etc/supervisor/conf.d/elasticsearch.conf /etc/supervisor/conf.d/elasticsearch.conf
+ADD etc/supervisor/conf.d/elasticsearch.conf /etc/supervisor.d/elasticsearch.conf
 ADD etc/consul.d/http.json /etc/consul.d/http.json
 ADD etc/consul.d/transport.json /etc/consul.d/transport.json
+ADD etc/elasticsearch.yml /elasticsearch/config/elasticsearch.yml
 
-EXPOSE 9200 9300
+# Define mountable directories.
+VOLUME ["/data"]
+
+# Define working directory.
+WORKDIR /data
+
+# Expose ports.
+#   - 9200: HTTP
+#   - 9300: transport
+EXPOSE 9200
+EXPOSE 9300

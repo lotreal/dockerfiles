@@ -1,0 +1,37 @@
+#
+# Base docker image for Centos 7 that sets up
+#
+FROM centos:centos7
+
+MAINTAINER Luo Tao <lotreal@gmail.com>
+
+# Install dependencies
+RUN yum install -y -q epel-release && \
+    yum update -y -q
+
+RUN yum install -y -q bind-utils net-tools supervisor wget tar unzip
+
+# Install consul
+RUN curl -o /tmp/consul.zip -L https://dl.bintray.com/mitchellh/consul/0.4.1_linux_amd64.zip && \
+    unzip /tmp/consul.zip -d /tmp/ && \
+    chmod +x /tmp/consul && \
+    mv /tmp/consul /usr/local/bin/consul && \
+    rm /tmp/consul.zip && \
+    mkdir -p /etc/consul.d
+
+
+# Clean up apt-leftovers
+RUN yum clean all
+
+ADD usr/bin/nc /usr/bin/nc
+# Configuration files
+ADD etc/consul.d/consul.json /etc/consul.d/consul.json
+ADD etc/supervisord.conf /etc/supervisord.conf
+ADD etc/supervisor.d/consul.conf /etc/supervisor.d/consul.conf
+# ADD etc/supervisor.d/rsyslog.conf /etc/supervisor.d/rsyslog.conf
+
+# For consul
+ENV GOMAXPROCS 10
+
+# Run Supervisord
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
