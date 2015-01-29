@@ -1,0 +1,12 @@
+{
+  "data_dir": "/var/lib/consul",
+  "ui_dir": "/ui",
+  "ports": {
+    "dns": 53
+  },
+  "recursor": "8.8.8.8",
+  "datacenter": "nine",
+  "domain": "zbj",
+  "rejoin_after_leave": true,
+  "log_level": "INFO"
+}
