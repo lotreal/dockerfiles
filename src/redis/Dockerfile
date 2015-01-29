@@ -1,4 +1,4 @@
-FROM lotreal:centos
+FROM lotreal/centos
 
 MAINTAINER Luo Tao <lotreal@gmail.com>
 
