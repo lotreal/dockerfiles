@@ -11,19 +11,13 @@ RUN yum install -y -q epel-release && \
 
 RUN yum install -y -q bind-utils net-tools supervisor wget tar unzip
 
+
 # Install consul
-RUN curl -o /tmp/consul.zip -L https://dl.bintray.com/mitchellh/consul/0.4.1_linux_amd64.zip && \
-    unzip /tmp/consul.zip -d /tmp/ && \
-    chmod +x /tmp/consul && \
-    mv /tmp/consul /usr/local/bin/consul && \
-    rm /tmp/consul.zip && \
-    mkdir -p /etc/consul.d
-
-
-# Clean up apt-leftovers
-RUN yum clean all
+ADD https://dl.bintray.com/mitchellh/consul/0.4.1_linux_amd64.zip /tmp/consul.zip
+RUN cd /bin && unzip /tmp/consul.zip && chmod +x /bin/consul && rm /tmp/consul.zip
 
 ADD usr/bin/nc /usr/bin/nc
+
 # Configuration files
 ADD etc/consul.d/consul.json /etc/consul.d/consul.json
 ADD etc/supervisord.conf /etc/supervisord.conf
