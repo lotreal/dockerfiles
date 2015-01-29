@@ -1,4 +1,4 @@
-docker run --rm -it -h cm \
+docker run -d --name consul -h master \
  -p 8300:8300 \
  -p 8301:8301 \
  -p 8301:8301/udp \
