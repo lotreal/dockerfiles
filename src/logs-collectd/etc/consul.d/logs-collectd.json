@@ -5,7 +5,7 @@
         "check": {
             "name": "Logs-Collectd Check",
             "notes": "Connect to the port internally every 10 seconds",
-            "script": "scan 25826",
+            "script": "scan 25826/udp",
             "interval": "10s"
         }
     }
