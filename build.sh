@@ -1,6 +1,6 @@
 #!/bin/bash
 PUSH=true
-IMAGES="centos java elasticsearch redis logstash logs-indexer logs-collectd"
+IMAGES="centos java elasticsearch redis logstash logs-indexer logs-collectd kibana"
 
 function buildAll {
   for image in $IMAGES
