@@ -9,14 +9,14 @@ MAINTAINER Luo Tao <lotreal@gmail.com>
 RUN yum install -y -q epel-release && \
     yum update -y -q
 
-RUN yum install -y -q bind-utils net-tools supervisor wget tar unzip
+RUN yum install -y -q bind-utils net-tools nmap supervisor wget tar unzip
 
 
 # Install consul
 ADD https://dl.bintray.com/mitchellh/consul/0.4.1_linux_amd64.zip /tmp/consul.zip
 RUN cd /bin && unzip /tmp/consul.zip && chmod +x /bin/consul && rm /tmp/consul.zip
 
-ADD usr/bin/nc /usr/bin/nc
+ADD usr/bin/scan /usr/bin/scan
 
 # Configuration files
 ADD etc/consul.d/consul.json /etc/consul.d/consul.json

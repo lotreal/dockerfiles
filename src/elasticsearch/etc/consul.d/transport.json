@@ -2,7 +2,7 @@
     "check": {
         "name": "Cluster Port",
         "notes": "Connect to the port internally every 10 seconds",
-        "script": "nc -z localhost 9300 >/dev/null 2>&1",
+        "script": "scan 9300",
         "interval": "10s"
     }
 }
