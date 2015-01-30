@@ -5,9 +5,9 @@ IMAGES="centos java elasticsearch redis logstash logs-indexer logs-collectd"
 function buildAll {
   for image in $IMAGES
   do
-    NAME=$image make build -n
+    NAME=$image make build
     if [[ "$PUSH" = true  ]]; then
-      NAME=$image make push -n
+      NAME=$image make push
     fi
   done
 }

@@ -1,0 +1,15 @@
+{
+    "service": {
+        "name": "kibana",
+        "tags": [
+            "http"
+        ],
+        "port": 80,
+        "check": {
+            "name": "Kibana Check",
+            "notes": "Connect to the port internally every 10 seconds",
+            "script": "curl localhost >/dev/null 2>&1",
+            "interval": "10s"
+        }
+    }
+}

@@ -12,7 +12,7 @@ RUN \
   rm -f $ES_PKG_NAME.tar.gz && \
   mv /$ES_PKG_NAME /elasticsearch
 
-ADD etc/supervisor/conf.d/elasticsearch.conf /etc/supervisor.d/elasticsearch.conf
+ADD etc/supervisor.d/elasticsearch.conf /etc/supervisor.d/elasticsearch.conf
 ADD etc/consul.d/http.json /etc/consul.d/http.json
 ADD etc/consul.d/transport.json /etc/consul.d/transport.json
 ADD etc/elasticsearch.yml /elasticsearch/config/elasticsearch.yml
