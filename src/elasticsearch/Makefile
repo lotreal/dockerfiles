@@ -35,7 +35,7 @@ clean:
 
 .PHONY: run
 run:
-	docker run --detach --name $(NAME) $(docker_run_flags) $(IMAGE)
+	docker run --detach $(docker_run_flags) $(IMAGE)
 
 .PHONY: shell
 shell:
