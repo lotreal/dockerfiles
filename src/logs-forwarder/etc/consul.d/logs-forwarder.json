@@ -1,0 +1,12 @@
+{
+    "service": {
+        "name": "logs-forwarder",
+        "port": 5043,
+        "check": {
+            "name": "Logs-Forwarder Check",
+            "notes": "Connect to the port internally every 10 seconds",
+            "script": "scan 5043",
+            "interval": "10s"
+        }
+    }
+}
